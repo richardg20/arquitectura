@@ -1,0 +1,78 @@
+{% extends "./navbar.html" %}
+{% load static %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+  <h1>Rutinas</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Imagen</th>
+        <th scope="col">Nombre rutina</th>
+        <th scope="col">Descripción rutina</th>
+        <th scope="col">Categoría</th>
+        
+      </tr>
+    </thead>
+    <tbody id="productos-container">
+    </tbody>
+  </table>
+  
+
+  
+<table id="productos-container"></table>
+
+
+<main>
+  <section class="profile-card">
+      <h2>GymUser</h2>
+  </section>
+  <section class="user-details">
+      <h3>Detalles del Usuario</h3>
+      <div class="user-info">
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Tu Nombre">
+      </div>
+      <div class="user-info">
+          <label for="email">Correo Electrónico:</label>
+          <input type="email" id="email" name="email" placeholder="Correo Electrónico">
+      </div>
+      <div class="user-info">
+          <label for="edad">Edad:</label>
+          <input type="number" id="edad" name="edad" placeholder="Tu Edad">
+      </div>
+      <div class="column">
+        <label for="peso">Peso (kg):</label>
+        <input type="number" id="peso" name="peso" placeholder="Tu Peso">
+    </div>
+    <div class="column">
+        <label for="altura">Altura (cm):</label>
+        <input type="number" id="altura" name="altura" placeholder="Tu Altura">
+    </div>
+      <div class="user-info">
+        <label for="objetivo">Objetivo de Entrenamiento:</label>
+        <textarea id="objetivo" name="objetivo" placeholder="Tu Objetivo" rows="4"></textarea>
+    </div>
+    
+      <button id="guardar">Guardar Cambios</button>
+  </section>
+</main>
+
+</div>
+<a id="btn-comprar" class="btn btn-success" href="{% url 'cargarcarro' %}">Completar</a>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/productos.js' %}"></script>
+<script>
+  var token = "{{ csrf_token }}";
+</script>
+
+{% endblock %}
+
+

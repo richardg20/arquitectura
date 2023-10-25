@@ -1,0 +1,115 @@
+{% extends "./navbar.html"%}
+{% load static %}
+{% block head%}
+    
+{% endblock %}
+{% block body%}
+<h1>Editar productos</h1>
+
+
+<div class="container mt-5">
+    <form id="form" action="/editarProductoForm" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+        <div class="row">
+            <div class="col-md-4">
+                <label for="txtSku">ID:</label>
+                <input readonly value="{{prod.sku}}" name="txtSku" id="txtSku" type="text" class="form-control">
+            </div>
+
+            <div class="col-md-8">
+                <label for="txtNombre">Nombre:</label>
+                <input value="{{prod.nombre}}" name="txtNombre" id="txtNombre" type="text" class="form-control">
+            </div>
+
+            <div class="col-md-4">
+                <label for="cmbCategoria">Categoria:</label>
+                <select name="cmbCategoria" id="cmbCategoria" class="form-select" aria-label="Default select example">
+                    <option disabled selected>Seleccione</option>
+                    {% for c in cate %}
+                    <option value="{{c.id_categoria}}" {% if c.id_categoria == prod.id_categoria.id_categoria %} selected {% endif %} >{{c.nombre_categoria}}</option>
+                    {% endfor %}
+                  </select>
+            </div>
+
+            <div class="col-md-12">
+                <label for="txtDescripcion">Descripción:</label>
+                <input value="{{prod.descripcion}}" name="txtDescripcion" id="txtDescripcion" type="text" class="form-control">
+            </div>
+
+            <div class="col-md-12">
+                <label for="txtImg">Imagen Url:</label>
+                <img src="{{prod.imagen_url.url}}" height="100" alt="">
+                <input name="txtImg" id="txtImg" type="file" class="form-control">
+            </div>
+
+            
+        </div>
+        <button class="btn btn-success mt-5 w-100">Agregar producto</button>
+    </form>
+</div>
+
+{% endblock %}
+{% block script %}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+<script > $(document).ready(function(){
+    
+})
+$(document).ready(function() {
+    $('#form').submit(function(evento) {
+        evento.preventDefault();
+
+        $("#form").validate({
+            rules:{
+                txtNombre:{
+                    required:true,
+                    minlength:10
+                },
+                txtDescripcion:{
+                    required:true,
+                    minlength:10
+                },
+                txtValor:{
+                    required:true,
+                    minlength:5
+                },
+                txtStock:{
+                    required:true,
+                    minlength:1
+                },
+                txtImagen:{
+                    required:true,
+                    minlength:5
+                }
+            },
+            messages:{
+                txtNombre:{
+                    required: "Debe ingresar un nombre",
+                    minlength:"Debe ingresar al menos 10 caracteres"
+                },
+                txtDescripcion:{
+                    required: "Debe ingresar una descripción",
+                    minlength:"Debe ingresar al menos 10 caracteres"
+                },
+                txtValor:{
+                    required: "Debe ingresar un valor",
+                    minlength:"Debe ingresar al menos 5 caracteres"
+                },
+                txtStock:{
+                    required: "Debe ingresar un stock",
+                    minlength:"Debe ingresar al menos 1 caracter"
+                },
+                txtImagen:{
+                    required: "Debe ingresar la URL de la imagen",
+                    minlength:"Debe ingresar al menos 5 caracteres"
+                }
+            },
+            submitHandler: function(form) {
+                form.submit();
+            }
+        });
+    });
+});
+</script>
+
+
+{% endblock %}

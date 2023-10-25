@@ -1,0 +1,51 @@
+{% extends "./navbar.html" %}
+{% load static %}
+{% block head %}
+
+{% endblock %}
+{% block body %}
+<div class="container mt-5">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Imagen</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in prod %}
+      
+      <tr>
+        <th scope="row">{{ p.sku }}</th>
+        <td><img src="{{ p.imagen_url.url }}" alt="" height="100"></td>
+        <td>{{ p.nombre }}</td>
+        <td>{{ p.descripcion }}</td>
+        <td>{{ p.id_categoria }}</td>
+        <td><form>
+          {% csrf_token %}
+          {% if user.is_authenticated %}
+                     
+          <button class="btn btn-primary agregar-carrito" data-sku="{{ p.sku }}">Agregar rutina</button>          
+                      {% else %}
+                      <button class="btn btn-primary disabled agregar-carrito" data-sku="{{ p.sku }}">Agregar al carrito</button>
+                      {% endif %}
+        </form>
+        
+        </td>
+      </tr>
+   
+
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+<script src="{% static 'js/carrito.js' %}"></script>
+{% block script %}
+
+
+{% endblock %}
