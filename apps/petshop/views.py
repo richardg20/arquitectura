@@ -262,7 +262,6 @@ def log_out(request):
     
 #     return redirect('/inicio')
 
-
 #Funciones perfil de usuario
 def actualizar_perfil(request):
     if request.method == 'POST':
@@ -273,8 +272,6 @@ def actualizar_perfil(request):
         peso = request.POST.get('peso')
         altura = request.POST.get('altura')
         objetivo = request.POST.get('objetivo')
-        print("Correo Electrónico:", email)
-        print("Edad:", edad)
         form = UserProfileForm(request.POST)
         
         if form.is_valid():

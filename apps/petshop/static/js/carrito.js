@@ -30,6 +30,11 @@ document.getElementById("guardar").addEventListener("click", function () {
 
   // Actualizar la zona "GymUser" con los nuevos datos
   document.getElementById("username").textContent = nombre;
+  document.getElementById("email").textContent = email;
+  document.getElementById("edad").textContent = edad;
+  document.getElementById("peso").textContent = peso;
+  document.getElementById("altura").textContent = altura;
+  document.getElementById("objetivo").textContent = objetivo;
 });
 
 document.getElementById("perfil-form").addEventListener("submit", function(event) {
@@ -46,11 +51,11 @@ document.getElementById("perfil-form").addEventListener("submit", function(event
       if (data.success) {
           // Actualiza la zona "GymUser" con los nuevos datos
           document.getElementById("username").textContent = data.nombre;
-          document.getElementById("user-email").textContent = `Correo Electrónico: ${data.email}`;
-          document.getElementById("user-age").textContent = `Edad: ${data.edad}`;
-          document.getElementById("user-peso").textContent = `Edad: ${data.peso}`;
-          document.getElementById("user-altura").textContent = `Edad: ${data.altura}`;
-          document.getElementById("user-objetivo").textContent = `Edad: ${data.objetivo}`;
+          document.getElementById("email").textContent = data.email;
+          document.getElementById("age").textContent = data.edad;
+          document.getElementById("peso").textContent = data.peso;
+          document.getElementById("altura").textContent = data.altura;
+          document.getElementById("objetivo").textContent = data.objetivo;
       } else {
           alert("Error al guardar los cambios.");
       }
