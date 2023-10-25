@@ -30,14 +30,14 @@
                       </li>
                       {% if user.is_authenticated %}
                       <li class="nav-item">
-                        <a id="link-nav" class="nav-link" href="/catalogo">Rutina</a>
+                        <a id="link-nav" class="bg-warning nav-link text-dark" href="/catalogo">Rutina</a>
 
                       </li> {% endif %}
                       {% if user.is_staff %}      
-                      <div id="dropdown" class="dropdown">
-                        <button id="btn-secondary" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <div id="dropdown" class="dropdown bg-warning">
+                        <a id="btn-secondary" class="btn btn-secondary dropdown-toggle bg-warning text-dark" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                           Otros
-                        </button>
+                        </a>
                         <ul class="dropdown-menu">
                           <li><a class="dropdown-item" href="/agregar">Agregar</a></li>
                           <li><a class="dropdown-item" href="/editar">Editar</a></li>
@@ -52,11 +52,16 @@
                     </div>
                     <div class="login-navbar">
                       {% if user.is_authenticated %}
-                     
-                        <a id="logout" class="nav-link" href="/logout" >Cerrar Sesión</a>
+                      
+                        <div class="perfil">
+
+                        
+                        <a id="logout" class="nav-link" style="margin-right:20px"  href="/logout" >Cerrar Sesión   </a>
                         <form action="">{% csrf_token %}
-                          <a id="btn-carr" class="link-carro" href="/carro"><i id="carro-icon"> Perfil</i></a> 
+                          <a id="btn-carr" class="link-carro" href="/carro"> <i id="carro-icon" class="text-white bi bi-person-circle" > Perfil</i> </a> 
                         </form>
+
+                      </div>
                       
                       {% else %}
                       <button type="button" class="btn btn-primary bg-white border-white" data-bs-target="#staticBackdrop">
