@@ -17,7 +17,6 @@ urlpatterns = [
     path('actualizar-stock',views.actualizar_stock),
     path('signup/', views.registrarse, name='signup'),
     path('logout/', views.log_out, name='logout'),
-    path('signin/', views.loguearse, name='signin')
-    
-    
+    path('signin/', views.loguearse, name='signin'),
+    path('actualizar_perfil/', views.actualizar_perfil, name='actualizar_perfil'),
 ]

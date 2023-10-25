@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
- 
 });
 
 
@@ -33,6 +32,30 @@ document.getElementById("guardar").addEventListener("click", function () {
   document.getElementById("username").textContent = nombre;
 });
 
+document.getElementById("perfil-form").addEventListener("submit", function(event) {
+  event.preventDefault();
+  
+  var formData = new FormData(this);
+
+  fetch("{% url 'actualizar_perfil' %}", {
+      method: "POST",
+      body: formData,
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.success) {
+          // Actualiza la zona "GymUser" con los nuevos datos
+          document.getElementById("username").textContent = data.nombre;
+          document.getElementById("user-email").textContent = `Correo Electrónico: ${data.email}`;
+          document.getElementById("user-age").textContent = `Edad: ${data.edad}`;
+          document.getElementById("user-peso").textContent = `Edad: ${data.peso}`;
+          document.getElementById("user-altura").textContent = `Edad: ${data.altura}`;
+          document.getElementById("user-objetivo").textContent = `Edad: ${data.objetivo}`;
+      } else {
+          alert("Error al guardar los cambios.");
+      }
+  });
+});
 
 
 

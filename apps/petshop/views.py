@@ -16,6 +16,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 import json
+#from .forms import UserProfileForm
 # Create your views here.
 
 def  cargarInicio(request):
@@ -260,3 +261,32 @@ def log_out(request):
     
     
 #     return redirect('/inicio')
+
+
+#Funciones perfil de usuario
+def actualizar_perfil(request):
+    if request.method == 'POST':
+        # Obtén los datos del formulario y realiza la actualización en la base de datos
+        nombre = request.POST.get('nombre')
+        email = request.POST.get('email')
+        edad = request.POST.get('edad')
+        peso = request.POST.get('peso')
+        altura = request.POST.get('altura')
+        objetivo = request.POST.get('objetivo')
+        print("Correo Electrónico:", email)
+        print("Edad:", edad)
+        form = UserProfileForm(request.POST)
+        
+        if form.is_valid():
+            # Guarda los datos actualizados en la base de datos
+            form.save()
+            return redirect('perfil')
+    else:
+        form = UserProfileForm()
+        # Actualiza los datos en la base de datos aquí
+
+        # Devuelve una respuesta JSON
+        return JsonResponse({'success': True, 'nombre': nombre, 'email': email, 'edad': edad, 'peso': peso, 'altura': altura, 'objetivo': objetivo})
+
+    return render(request, 'perfil.html')
+

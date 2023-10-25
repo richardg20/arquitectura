@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
+from django import forms
+from django.db import models
 
 
 # Create your models here.
@@ -34,3 +36,18 @@ class Usuario(models.Model):
     def __str__(self):
         txt = "ID: {0} - Nombre: {1} "
         return txt.format(self.idusuario, self.nombre)
+    
+    
+#Clases de Perfil de usuario
+class UserProfile(models.Model):
+    nombre = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100)
+    edad = models.EmailField(max_length=2)
+    peso = models.EmailField(max_length=3)
+    altura = models.EmailField(max_length=3)
+    objetivo = models.EmailField(max_length=200)
+    
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['nombre', 'email', 'edad', 'peso', 'altura', 'objetivo']
