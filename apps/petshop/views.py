@@ -8,6 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from .models import Producto
+from .models import  PerfilUsuario
 from django.core import serializers
 from collections import Counter
 from collections import defaultdict
@@ -240,29 +241,23 @@ def actualizar_stock(request):
 
 
 def registrarse(request):
-
     if request.method == 'GET':
-        return render(request,"signup.html",{
-        'form': UserCreationForm
-        })
+        return render(request, "signup.html", {'form': UserCreationForm})
     else:
         if request.POST['contrasenia_i'] == request.POST['contrasenia_f']:
-            
             try:
                 user = User.objects.create_user(username=request.POST['username'], password=request.POST['contrasenia_i'])
-                print(user)
                 user.save()
-                login(request, user) 
+
+                # Crea automáticamente un UserProfile asociado al nuevo usuario
+                user_profile = PerfilUsuario(user=user)
+                user_profile.save()
+
+                login(request, user)
                 return redirect('/inicio')
             except:
-                return render(request,"signup.html",{
-                    'form': UserCreationForm,
-                    "error": 'Este usuario ya existe'
-                })   
-        return render(request,"signup.html",{
-            'form': UserCreationForm,
-            "error": 'Las contrasenias ingresadas deben ser iguales'
-        })  
+                return render(request, "signup.html", {'form': UserCreationForm, "error": 'Este usuario ya existe'})
+        return render(request, "signup.html", {'form': UserCreationForm, "error": 'Las contraseñas ingresadas deben ser iguales'})
 
 
 def log_out(request):
@@ -301,3 +296,25 @@ def actualizar_perfil(request):
 
     return render(request, 'perfil.html')
 
+def increase_rutina_completa(request):
+
+    usuario = request.user
+
+ 
+    try:
+        user_profile = PerfilUsuario.objects.get(user=usuario)
+        if user_profile.rutina_completa == 0:
+            user_profile.rutina_completa += 1
+        elif user_profile.rutina_completa >= 1:
+            user_profile.rutina_completa += 1
+            user_profile.insignia_url = 'apps\petshop\static\img\Medalla_5.png'
+        else:
+            user_profile.rutina_completa += 1
+        user_profile.save()
+        print(f'Valor de rutina_completa: {user_profile.rutina_completa}')
+        messages.success(request, 'Rutina completada con éxito.')
+        
+        return redirect('cargarcarro') 
+    except PerfilUsuario.DoesNotExist:
+        print('aaaaaaaaaaaaa')
+        return HttpResponse("El usuario no tiene un UserProfile asociado.")

@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
 from django import forms
 from django.db import models
-
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Categoria(models.Model):
@@ -54,3 +54,9 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['nombre', 'email', 'edad', 'peso', 'altura', 'objetivo']
+        
+class PerfilUsuario(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    rutina_completa = models.IntegerField(default=0)
+    insignia_url = models.CharField(max_length=200, blank=True, null=True)
+    

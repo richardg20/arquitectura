@@ -7,15 +7,18 @@
 
 {% block body %}
 <div class="container mt-5">
+  
+  {% if user.perfilusuario.rutina_completa >= 1 %}
+  <img src="{% static 'img/Medalla_5.png' %}" alt="Insignia 1">
+  {% endif %}
+  
   <h1>Rutinas</h1>
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Imagen</th>
         <th scope="col">Nombre rutina</th>
         <th scope="col">Descripción rutina</th>
-        <th scope="col">Categoría</th>
+
       </tr>
     </thead>
     <tbody id="productos-container">
@@ -23,7 +26,7 @@
   </table>
   
 <table id="productos-container"></table>
-
+<a id="btn-aumentar-rutina" class="btn btn-warning">Completar rutina</a>
 <main>
   <div class="profile-card">
     <h2 id="username">GymUser</h2>
@@ -67,7 +70,6 @@
 </main>
 
 </div>
-<a id="btn-comprar" class="btn btn-success" href="{% url 'cargarcarro' %}">Completar</a>
 {% endblock %}
 
 {% block script %}
@@ -75,7 +77,25 @@
 <script>
   var token = "{{ csrf_token }}";
 </script>
-
+<script>
+  document.getElementById('btn-aumentar-rutina').addEventListener('click', function() {
+    fetch("{% url 'increase_rutina_completa' %}", {
+      method: 'POST',  // O usa 'GET' según cómo esté configurada tu vista
+      headers: {
+        'X-CSRFToken': '{{ csrf_token }}'  // Añade el token CSRF para proteger contra ataques CSRF
+      }
+    })
+    .then(response => {
+      if (response.status === 200) {
+        // Recarga la página después de aumentar la rutina completa
+        location.reload();
+      }
+    })
+    .catch(error => {
+      console.error('Error al aumentar la rutina completa:', error);
+    });
+  });
+</script>
 {% endblock %}
 
-
+picopalquelee

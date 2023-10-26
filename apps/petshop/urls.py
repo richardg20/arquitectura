@@ -19,4 +19,5 @@ urlpatterns = [
     path('logout/', views.log_out, name='logout'),
     path('signin/', views.loguearse, name='signin'),
     path('actualizar_perfil/', views.actualizar_perfil, name='actualizar_perfil'),
+    path('aumentar-rutina-completa/', views.increase_rutina_completa, name='increase_rutina_completa')
 ]

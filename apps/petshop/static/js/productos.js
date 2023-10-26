@@ -49,8 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
             total += subtotal;
             var productoElement = document.createElement('tr');
           productoElement.innerHTML = `
-            <td>${producto.sku}</td>
-            <td><img src="${producto.imagen_url}" alt="${producto.nombre}" width="50"></td>
+
             <td>${producto.nombre}</td>
             <td>${producto.descripcion}</td>
 
@@ -65,13 +64,12 @@ document.addEventListener('DOMContentLoaded', function() {
             total += subtotal;
             var productoElement = document.createElement('tr');
           productoElement.innerHTML = `
-            <td>${producto.sku}</td>
-            <td><img src="${producto.imagen_url}" alt="${producto.nombre}" width="50"></td>
+
             <td>${producto.nombre}</td>
             <td>${producto.descripcion}</td>
 
  
-            <td><button class="eliminar-btn">Eliminar</button></td>
+            
           `;
           productosContainer.appendChild(productoElement);
           }
@@ -79,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
          
   
           var eliminarButton = productoElement.getElementsByClassName('eliminar-btn')[0];
-          eliminarButton.addEventListener('click', crearEventoEliminar(producto, sku));
+         
   
   
         });
@@ -87,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
        
   
   
-        var btnComprar = document.getElementById('btn-comprar');
+        var btnComprar = document.getElementById('btn-aumentar-rutina');
   
   
         btnComprar.addEventListener('click', function() {
