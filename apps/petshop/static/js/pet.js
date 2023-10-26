@@ -2,57 +2,57 @@ let valorM = false;
 const formulario = document.getElementById("agregarProductoForm");
 const toastContainer = document.getElementById("toastContainer"); 
 
-formulario.addEventListener('submit', function(evento){
-    evento.preventDefault();
+// formulario.addEventListener('submit', function(evento){
+//     evento.preventDefault();
     
-    var checkArray = [
-      { id: "txtSku", value: document.getElementById("txtSku").value },
-      { id: "txtPrecio", value: document.getElementById("txtPrecio").value },
-      { id: "txtNombre", value: document.getElementById("txtNombre").value },
-      { id: "txtImg", value: document.getElementById("txtImg").value },
-      { id: "txtDescripcion", value: document.getElementById("txtDescripcion").value },
-      { id: "txtStock", value: document.getElementById("txtStock").value },
-      { id: "cmbCategoria", value: document.getElementById("cmbCategoria").value }
-  ];
+//     var checkArray = [
+//       { id: "txtSku", value: document.getElementById("txtSku").value },
+//       { id: "txtPrecio", value: document.getElementById("txtPrecio").value },
+//       { id: "txtNombre", value: document.getElementById("txtNombre").value },
+//       { id: "txtImg", value: document.getElementById("txtImg").value },
+//       { id: "txtDescripcion", value: document.getElementById("txtDescripcion").value },
+//       { id: "txtStock", value: document.getElementById("txtStock").value },
+//       { id: "cmbCategoria", value: document.getElementById("cmbCategoria").value }
+//   ];
     
  
 
-  if (isNaN(parseInt(txtSku.value))) {
-    showToast("El SKU debe ser un número entero o esta incompleto.", txtSku.value);
-    return false;
-  }
+//   if (isNaN(parseInt(txtSku.value))) {
+//     showToast("El SKU debe ser un número entero o esta incompleto.", txtSku.value);
+//     return false;
+//   }
 
  
-  else if (isNaN(parseInt(txtStock.value))) {
-    showToast("El stock debe ser un número entero o esta incompleto.");
-    return false;
-  }
+//   else if (isNaN(parseInt(txtStock.value))) {
+//     showToast("El stock debe ser un número entero o esta incompleto.");
+//     return false;
+//   }
 
   
-  else if (isNaN(parseInt(txtPrecio.value))) {
-    showToast("El precio debe ser un número entero o esta incompleto.");
-    return false;
-  }
-  else{
+//   else if (isNaN(parseInt(txtPrecio.value))) {
+//     showToast("El precio debe ser un número entero o esta incompleto.");
+//     return false;
+//   }
+//   else{
 
-    if (txtSku === "" || txtPrecio === "" || txtNombre === "" || txtDescripcion === "" || txtStock === "" || cmbCategoria.value === "Seleccione" || txtImg.files.length === 0 ) {
-      showToast("Falta uno o más campos por completar");
-      valorM = false;
-    } else{
+//     if (txtSku === "" || txtPrecio === "" || txtNombre === "" || txtDescripcion === "" || txtStock === "" || cmbCategoria.value === "Seleccione" || txtImg.files.length === 0 ) {
+//       showToast("Falta uno o más campos por completar");
+//       valorM = false;
+//     } else{
        
-      valorM = true;
-      showModal();
+//       valorM = true;
+//       showModal();
 
-      var btnContinue = document.getElementById("btn-continue");
+//       var btnContinue = document.getElementById("btn-continue");
 
   
-      btnContinue.addEventListener("click", function(event) {
-        evento.preventDefault();
-        formulario.submit();
-      });
-    }
-  }
-});
+//       btnContinue.addEventListener("click", function(event) {
+//         evento.preventDefault();
+//         formulario.submit();
+//       });
+//     }
+//   }
+// });
 
 function showToast(message, value) {
   const toastElement = document.createElement("div");

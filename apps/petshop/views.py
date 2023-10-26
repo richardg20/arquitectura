@@ -65,16 +65,30 @@ def cargarAgregarProducto(request):
 
 def agregarProducto(request):
 
-    #v_sku = request.POST['txtSku']
+    v_sku = request.POST['txtSku']
 
     v_nombre = request.POST['txtNombre']
     #v_stock = request.POST['txtStock']
+    v_stock = 0
     v_precio = request.POST['txtPrecio']
     v_descripcion = request.POST['txtDescripcion']
     v_img = request.FILES['txtImg']
-    #v_categoria = Categoria.objects.get(id_categoria = request.POST['cmbCategoria'])
+    v_categoria = Categoria.objects.get(id_categoria = request.POST['cmbCategoria'])
 
-    Producto.objects.create(nombre = v_nombre, precio = v_precio,descripcion = v_descripcion,imagen_url = v_img)  
+
+    #Producto.objects.create(nombre = v_nombre, precio = v_precio,descripcion = v_descripcion,imagen_url = v_img)  
+
+    producto = Producto(
+        sku= v_sku,
+        nombre= v_nombre,
+        stock = v_stock,
+        precio = v_precio,
+        descripcion = v_descripcion,
+        id_categoria = v_categoria,
+        imagen_url = v_img,
+    )
+
+    producto.save()
     messages.success(request,'Objeto ingresado correctamente')
     return redirect('/agregar')
 
@@ -179,7 +193,7 @@ def obtener_productos(request):
             response_data.append({
                 #'sku': producto.sku,
                 'nombre': producto.nombre,
-                'imagen_url': producto.imagen_url.url,
+                #'imagen_url': producto.imagen_url.url,
                 #'stock': producto.stock,
                 'precio': producto.precio,
                 'descripcion': producto.descripcion,

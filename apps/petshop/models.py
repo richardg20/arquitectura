@@ -17,17 +17,20 @@ class Producto(models.Model):
     #sku = models.IntegerField(primary_key=True)
     sku = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=1500)
-    # stock = models.IntegerField() 
-    precio = models.IntegerField()
-    descripcion = models.CharField(max_length=200)
+    stock = models.IntegerField(null=True, default=0) 
+    precio = models.IntegerField(null=True, default=0)
+    #precio = models.IntegerField()
+    descripcion = models.CharField(max_length=1000)
     id_categoria = models.ForeignKey(Categoria,on_delete=models.CASCADE)
-    imagen_url = models.ImageField(upload_to='imagenesProducto')
+    imagen_url = models.ImageField(upload_to='imagenesProducto', null=True)
 
     def __str__(self):
         txt = "N° {0} - Stock: {1} - nombre: {2}"
         return txt.format(self.sku,self.stock, self.nombre)
 
-    
+
+
+
 class Usuario(models.Model):
     idusuario = models.IntegerField(primary_key=True, default="id")
     nombre = models.CharField(max_length=50, default="usuario")   
