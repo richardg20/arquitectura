@@ -11,9 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
       localStorage.setItem('cartItems', JSON.stringify(cartItems));
     });
   });
-
 });
-
 
 //Guardar datos del GymUser
 document.getElementById("guardar").addEventListener("click", function () {
@@ -39,7 +37,6 @@ document.getElementById("guardar").addEventListener("click", function () {
 
 document.getElementById("perfil-form").addEventListener("submit", function(event) {
   event.preventDefault();
-  
   var formData = new FormData(this);
 
   fetch("{% url 'actualizar_perfil' %}", {
