@@ -49,7 +49,7 @@ document.getElementById("perfil-form").addEventListener("submit", function(event
           // Actualiza la zona "GymUser" con los nuevos datos
           document.getElementById("username").textContent = data.nombre;
           document.getElementById("email").textContent = data.email;
-          document.getElementById("age").textContent = data.edad;
+          document.getElementById("edad").textContent = data.edad;
           document.getElementById("peso").textContent = data.peso;
           document.getElementById("altura").textContent = data.altura;
           document.getElementById("objetivo").textContent = data.objetivo;
@@ -58,9 +58,5 @@ document.getElementById("perfil-form").addEventListener("submit", function(event
       }
   });
 });
-
-
-
-
 
 
